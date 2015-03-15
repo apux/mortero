@@ -22,13 +22,48 @@ Or install it yourself as:
 
 ```ruby
 hashes = [
-  { "Company Name" => "My Company Inc.", "Web Page" => "www.mycompany.com", "Magazine" => "Automobile Today", "Section" => "News" }, 
-  { "Company Name" => "My Company Inc.", "Web Page" => "www.mycompany.com", "Magazine" => "Automobile Today", "Section" => "Reviews" },
-  { "Company Name" => "My Company Inc.", "Web Page" => "www.mycompany.com", "Magazine" => "Moto Today", "Section" => "News" },
-  { "Company Name" => "My Company Inc.", "Web Page" => "www.mycompany.com", "Magazine" => "Moto Today", "Section" => "Routes" },
-  { "Company Name" => "My Second Company Inc.", "Web Page" => "www.mycompany2.com", "Magazine" => "Computers & Gadgets", "Section" => "Laptops" },
-  { "Company Name" => "My Second Company Inc.", "Web Page" => "www.mycompany2.com", "Magazine" => "Computers & Gadgets", "Section" => "Desktop" },
-  { "Company Name" => "My Second Company Inc.", "Web Page" => "www.mycompany2.com", "Magazine" => "Computers & Gadgets", "Section" => "Mobile" },
+  {
+    "Company Name" => "My Company Inc.",
+    "Web Page" => "www.mycompany.com",
+    "Magazine" => "Automobile Today",
+    "Section" => "News"
+  }, 
+  {
+    "Company Name" => "My Company Inc.",
+    "Web Page" => "www.mycompany.com",
+    "Magazine" => "Automobile Today",
+    "Section" => "Reviews"
+  },
+  {
+    "Company Name" => "My Company Inc.",
+    "Web Page" => "www.mycompany.com",
+    "Magazine" => "Moto Today",
+    "Section" => "News"
+  },
+  {
+    "Company Name" => "My Company Inc.",
+    "Web Page" => "www.mycompany.com",
+    "Magazine" => "Moto Today",
+    "Section" => "Routes"
+  },
+  {
+    "Company Name" => "My Second Company Inc.",
+    "Web Page" => "www.mycompany2.com",
+    "Magazine" => "Computers & Gadgets",
+    "Section" => "Laptops"
+  },
+  {
+    "Company Name" => "My Second Company Inc.",
+    "Web Page" => "www.mycompany2.com",
+    "Magazine" => "Computers & Gadgets",
+    "Section" => "Desktop"
+  },
+  {
+    "Company Name" => "My Second Company Inc.",
+    "Web Page" => "www.mycompany2.com",
+    "Magazine" => "Computers & Gadgets",
+    "Section" => "Mobile"
+  },
 ]
 Mortero.convert(hashes) do
   fields name: "Company Name"
@@ -43,41 +78,41 @@ Mortero.convert(hashes) do
   end
 end
 # => [
-  {
-    name: "My Company Inc.",
-    contact_info_attributes: { page: "www.mycompany.com" },
-    magazines_attributes: [
-      { 
-        name: "Automobile Today",
-        sections_attributes: [
-          { name: "News" },
-          { name: "Reviews" }
-        ] 
-      },
-      {
-        name: "Moto Today",
-        sections_attributes: [
-          { name: "News" },
-          { name: "Routes" }
-        ]
-      }
-    ]
-  },
-  {
-    name: "My Second Company Inc.",
-    contact_info_attributes: { page: "www.mycompany2.com" },
-    magazines_attributes: [
-      {
-        name: "Computers & Gadgets",
-        sections_attributes: [
-         { name: "Laptops" },
-         { name: "Desktop" },
-         { name: "Mobile" }
-       ]
-     }
-   ]
- },
-]
+#  {
+#    name: "My Company Inc.",
+#    contact_info_attributes: { page: "www.mycompany.com" },
+#    magazines_attributes: [
+#      { 
+#        name: "Automobile Today",
+#        sections_attributes: [
+#          { name: "News" },
+#          { name: "Reviews" }
+#        ] 
+#      },
+#      {
+#        name: "Moto Today",
+#        sections_attributes: [
+#          { name: "News" },
+#          { name: "Routes" }
+#        ]
+#      }
+#    ]
+#  },
+#  {
+#    name: "My Second Company Inc.",
+#    contact_info_attributes: { page: "www.mycompany2.com" },
+#    magazines_attributes: [
+#      {
+#        name: "Computers & Gadgets",
+#        sections_attributes: [
+#         { name: "Laptops" },
+#         { name: "Desktop" },
+#         { name: "Mobile" }
+#       ]
+#     }
+#   ]
+# },
+#]
 ```
 
 ## Contributing
