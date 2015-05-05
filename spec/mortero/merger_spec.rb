@@ -13,7 +13,7 @@ RSpec.describe Mortero::Merger do
     ]
   end
 
-  it "merges when the hases share values" do
+  it "merges when the hashes share values" do
     hashes = [
       { name: "My Company Inc.", page: "www.mycompany.com" },
       { name: "My Company Inc.", page: "www.mycompany.com" }
@@ -69,7 +69,7 @@ RSpec.describe Mortero::Merger do
 
   it "merges nested attributes with multiple levels (hash_many and has_one)" do
     hashes = [
-      {     
+      {
         name: "My Company Inc.",
         page: "www.mycompany.com",
         magazines_attributes: [

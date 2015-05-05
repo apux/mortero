@@ -42,8 +42,7 @@ module Mortero
     end
 
     def merge_nested_attributes!
-      duplicated_hash = duplicated
-      keys_to_merge.each do |k|
+      keys_to_merge.each.with_object(duplicated) do |k, duplicated_hash|
         duplicated_hash[k] = evaluate_merge(duplicated_hash, k) if @hash[k]
       end
     end
