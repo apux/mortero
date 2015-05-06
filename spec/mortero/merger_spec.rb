@@ -73,13 +73,13 @@ RSpec.describe Mortero::Merger do
         name: "My Company Inc.",
         page: "www.mycompany.com",
         magazines_attributes: [
-          { 
+          {
             name: "Automobile Today",
             sections_attributes: [
               { name: "News" }
             ]
-          } 
-        ],  
+          }
+        ],
         contact_info_attributes: {
           emails_attributes: [
             { address: "mail1@mycompany.com" },

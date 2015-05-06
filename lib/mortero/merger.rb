@@ -11,47 +11,47 @@ module Mortero
     end
   end
 
+  module AttributesHashHelpers
+    refine Hash do
+      def same_attributes?(hash_to_compare)
+        keys_to_compare.all? { |k| self[k] == hash_to_compare[k] }
+      end
+
+      def merge_nested_attributes!(hash)
+        keys_to_merge.each do |k|
+          self[k] = evaluate_merge(hash, k) if hash[k]
+        end
+      end
+
+      private
+
+      def keys_to_compare
+        keys.keep_if { |k| !k.to_s.end_with?("_attributes") }
+      end
+
+      def keys_to_merge
+        keys.keep_if { |k| k.to_s.end_with?("_attributes") }
+      end
+
+      def evaluate_merge(hash, k)
+        if hash[k].kind_of?(Array)
+          Merger.new(self[k] + hash[k]).merge
+        else
+          Merger.new([self[k], hash[k]]).merge.last
+        end
+      end
+    end
+  end
+
   class AttributesArray < Array
+    using AttributesHashHelpers
+
     def merge_hash(hash)
-      @hash = hash
-      if duplicated?
-        merge_nested_attributes!
+      duplicated = find { |h| h.same_attributes?(hash) }
+      if duplicated
+        duplicated.merge_nested_attributes!(hash)
       else
         self << hash
-      end
-    end
-
-  private
-
-    def duplicated?
-      !!duplicated
-    end
-
-    def duplicated
-      find do |hash_to_compare|
-        keys_to_compare.all? { |k| @hash[k] == hash_to_compare[k] }
-      end
-    end
-
-    def keys_to_compare
-      @hash.keys.keep_if { |k| !k.to_s.end_with?("_attributes") }
-    end
-
-    def keys_to_merge
-      @hash.keys.keep_if { |k| k.to_s.end_with?("_attributes") }
-    end
-
-    def merge_nested_attributes!
-      keys_to_merge.each.with_object(duplicated) do |k, duplicated_hash|
-        duplicated_hash[k] = evaluate_merge(duplicated_hash, k) if @hash[k]
-      end
-    end
-
-    def evaluate_merge(duplicated_hash, k)
-      if duplicated_hash[k].kind_of?(Array)
-        Merger.new(duplicated_hash[k] + @hash[k]).merge
-      else
-        Merger.new([duplicated_hash[k], @hash[k]]).merge.last
       end
     end
   end
